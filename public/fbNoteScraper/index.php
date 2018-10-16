@@ -24,7 +24,8 @@
 			<?php
 				ini_set('error_reporting', E_ALL);
 				ini_set('display_errors', 'On'); 
-				require '../../vendor/autoload.php';
+				require_once '../../vendor/autoload.php';
+				use Sunra\PhpSimple\HtmlDomParser;
 				//This section scrapes our notes page and dumps the info here.
 				$opts = array(
 				  'http'=>array(
@@ -35,7 +36,7 @@
 				$noteUrl = "https://www.facebook.com/notes/oxford-parkour/upcoming-training/1786670351562542";
 				$fbNotePageStr = file_get_contents($noteUrl, false, $context);
 				$fbNotePageStrUTF8 = mb_convert_encoding($fbNotePageStr, 'HTML-ENTITIES', "UTF-8");
-				$fbNoteHtml = str_get_html($fbNotePageStrUTF8);
+				$fbNoteHtml = HtmlDomParser::str_get_html($fbNotePageStrUTF8);
 				$externalUrls = $fbNoteHtml->find('#content a[href^="https://l.facebook.com/l.php?u="], #content a[href^="http://l.facebook.com/l.php?u="]');
 				
 				foreach ($externalUrls as $extUrl){
@@ -57,6 +58,8 @@
 				
 				$noteBody = $fbNoteHtml->find('#content');
 				echo $noteBody[0];
+				$fbNoteHtml->clear();
+				unset($fbNoteHtml);
 			?>
 		</div>
     </body>
