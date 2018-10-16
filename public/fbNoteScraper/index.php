@@ -26,6 +26,7 @@
 				ini_set('display_errors', 'On'); 
 				require_once '../../vendor/autoload.php';
 				use Sunra\PhpSimple\HtmlDomParser;
+				define('MAX_FILE_SIZE', 100000000);
 				//This section scrapes our notes page and dumps the info here.
 				$opts = array(
 				  'http'=>array(
@@ -58,8 +59,6 @@
 				
 				$noteBody = $fbNoteHtml->find('#content');
 				echo $noteBody[0];
-				$fbNoteHtml->clear();
-				unset($fbNoteHtml);
 			?>
 		</div>
     </body>
