@@ -22,9 +22,9 @@
     <body>
 		<div id="FBContent">
 			<?php
-				error_reporting(E_ALL);
-				ini_set('display_errors', '1');
-				require __DIR__ . '/vendor/autoload.php';
+				ini_set('error_reporting', E_ALL);
+				ini_set('display_errors', 'On'); 
+				require '../../vendor/autoload.php';
 				//This section scrapes our notes page and dumps the info here.
 				$opts = array(
 				  'http'=>array(
